@@ -2,6 +2,10 @@
 
 An interactive statistical explainer exploring Sequential Multiple Assignment Randomized Trials (SMARTs) as an alternative to traditional A/B testing when treatment decisions need to adapt to individual responses.
 
+## Live Interactive Explainer
+
+[**View the SMART Experiments Explainer**](https://maxinehb.github.io/smart-experiments-explainer/)
+
 ## Project Overview
 
 Traditional randomized experiments typically assign participants to a treatment at the beginning of a study. SMART designs extend this framework by allowing subsequent treatment decisions to depend on participants' responses.
