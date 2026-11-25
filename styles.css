@@ -1,0 +1,294 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@400;500;600;700&display=swap');
+
+/* Color palette */
+
+:root {
+  --lavender: #EDE7F6;
+  --purple: #8973B5;
+  --deep-purple: #51436D;
+  --blue: #DCEAF7;
+  --background: #FCFBFE;
+  --text: #383441;
+}
+
+/* General typography */
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: 'Lato', sans-serif;
+  line-height: 1.85;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--deep-purple);
+  font-weight: 600;
+}
+
+h2 {
+  margin-top: 2.8rem;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--lavender);
+}
+
+h3 {
+  margin-top: 2rem;
+}
+
+p {
+  margin-bottom: 1.25rem;
+}
+
+/* Title section */
+
+#title-block-header {
+  background: transparent;
+  border-radius: 0;
+  padding: 20px 0 25px;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #D8CDEA;
+}
+
+#title-block-header .title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+  color: var(--deep-purple);
+  font-weight: 700;
+}
+
+#title-block-header .quarto-title-meta {
+  margin-top: 20px;
+}
+
+/* Table of contents */
+
+#TOC {
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+#TOC a {
+  color: var(--deep-purple);
+}
+
+#TOC a.active {
+  color: var(--purple);
+  border-left-color: var(--purple);
+}
+
+/* Links */
+
+a {
+  color: #75609E;
+}
+
+a:hover {
+  color: var(--deep-purple);
+}
+
+/* Figures */
+
+figure {
+  margin: 30px auto;
+}
+
+figure img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+figcaption {
+  color: #756B82;
+  font-size: 0.88rem;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* Tables */
+
+table {
+  font-size: 0.9rem;
+}
+
+thead {
+  background-color: var(--lavender);
+  color: var(--deep-purple);
+}
+
+/* Code blocks */
+
+div.sourceCode {
+  background-color: #F5F2FA;
+  border: 1px solid #E3DCEE;
+  border-radius: 12px;
+}
+
+details {
+  margin: 15px 0;
+}
+
+summary {
+  color: var(--deep-purple);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Callouts */
+
+.callout {
+  border-radius: 12px;
+  margin: 25px 0;
+}
+
+/* Blockquotes */
+
+blockquote {
+  background-color: #F5F2FA;
+  border-left: 4px solid var(--purple);
+  border-radius: 0 12px 12px 0;
+  padding: 18px 22px;
+  color: var(--deep-purple);
+}
+
+/* References */
+
+#refs {
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+/* Mobile layout */
+
+@media (max-width: 768px) {
+  #title-block-header {
+    padding: 30px 20px;
+  }
+
+  body {
+    line-height: 1.7;
+  }
+}
+
+/* Lavender aesthetic refinements */
+
+:root {
+  --background: #F0EBF8;
+  --lavender: #DDD2EF;
+}
+
+body {
+  background-color: var(--background);
+}
+
+/* More defined section headings */
+
+h2 {
+  border-bottom: 2px solid #C9B9E1;
+  padding-bottom: 14px;
+}
+
+/* Light backgrounds for figures */
+
+figure {
+  background-color: #FCFAFF;
+  border: 1px solid #DDD2EF;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* Consistent navigation colors */
+
+#TOC .nav-link.active {
+  color: #75609E !important;
+  border-left-color: #8973B5 !important;
+}
+
+/* Softer text selection */
+
+::selection {
+  background: #D8C8EE;
+  color: #51436D;
+}
+
+/* Refined table styling */
+
+table {
+  width: 100%;
+  background-color: #FCFAFF;
+  border: 1px solid #D8CDEA;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9rem;
+  --bs-table-bg: #FCFAFF;
+  --bs-table-striped-bg: #F3EEF9;
+  --bs-table-striped-color: #383441;
+}
+
+table thead th {
+  background-color: #DDD2EF !important;
+  color: #51436D;
+  font-weight: 700;
+  padding: 12px 14px;
+  border-bottom: 2px solid #C9B9E1;
+}
+
+table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #E3DCEE;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: #FCFAFF;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #F3EEF9;
+}
+
+table caption {
+  color: #51436D;
+  font-size: 0.9rem;
+  padding: 12px 0;
+  text-align: center;
+}
+
+table:has(th:first-child:last-child) {
+  width: 100%;
+}
+
+table:has(th:nth-child(2):last-child) th:first-child {
+  width: 35%;
+}
+
+table:has(th:nth-child(2):last-child) th:nth-child(2) {
+  width: 65%;
+}
+
+/* Table alignment and spacing */
+
+table {
+  margin: 28px auto !important;
+  width: 100%;
+}
+
+/* Center all headings and cell contents */
+table th,
+table td {
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 12px 16px !important;
+}
+
+/* Consistent numerical spacing */
+table td {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Center table captions */
+table caption {
+  text-align: center !important;
+  margin-bottom: 10px;
+}

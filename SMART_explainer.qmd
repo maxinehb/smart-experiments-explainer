@@ -1,0 +1,1354 @@
+---
+title: "SMART Experiments: <br>What Comes Next?"
+author: "Maxine Hakimi-Bulson"
+output-file: index.html
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    embed-resources: true
+    toc: true
+    toc-depth: 3
+    toc-title: "In this explainer"
+    toc-location: right
+    code-fold: true
+    code-summary: "View R code"
+    smooth-scroll: true
+    fig-align: center
+    fontsize: 1.05em
+editor: visual
+references:
+  - id: almirall2014
+    type: article-journal
+    title: "Introduction to SMART designs for the development of adaptive interventions: with application to weight loss research"
+    author:
+      - {family: Almirall, given: Daniel}
+      - {family: Nahum-Shani, given: Inbal}
+      - {family: Sherwood, given: Nancy E.}
+      - {family: Murphy, given: Susan A.}
+    issued: {date-parts: [[2014]]}
+    container-title: Translational Behavioral Medicine
+    volume: 4
+    issue: 3
+    page: 260-274
+    DOI: 10.1007/s13142-014-0265-0
+  - id: nahum-shani2012
+    type: article-journal
+    title: Experimental Design and Primary Data Analysis Methods for Comparing Adaptive Interventions
+    author:
+      - {family: Nahum-Shani, given: Inbal}
+      - {family: Qian, given: Min}
+      - {family: Almirall, given: Daniel}
+      - {family: Pelham, given: William E.}
+      - {family: Gnagy, given: Beth}
+      - {family: Fabiano, given: Greg}
+      - {family: Waxmonsky, given: Jim}
+      - {family: Yu, given: Jihnhee}
+      - {family: Murphy, given: Susan}
+    issued: {date-parts: [[2012]]}
+    container-title: Psychological Methods
+    volume: 17
+    issue: 4
+    page: 457-477
+    DOI: 10.1037/a0029372
+  - id: sherwood2021
+    type: article-journal
+    title: "BestFIT Sequential Multiple Assignment Randomized Trial Results: A SMART Approach to Developing Individualized Weight Loss Treatment Sequences"
+    author:
+      - {family: Sherwood, given: Nancy E.}
+      - {family: Crain, given: A Lauren}
+      - {family: Seburg, given: Elisabeth M.}
+      - {family: Butryn, given: Meghan L.}
+      - {family: Forman, given: Evan M.}
+      - {family: Crane, given: Melissa M.}
+      - {family: Levy, given: Rona L.}
+      - {family: Kunin-Batson, given: Alicia S.}
+      - {family: Jeffery, given: Robert W.}
+    issued: {date-parts: [[2022]]}
+    container-title: Annals of Behavioral Medicine
+    volume: 56
+    issue: 3
+    page: 291-304
+    DOI: 10.1093/abm/kaab061
+  - id: yapSMARTworkflow
+    type: webpage
+    title: "V2: Primary Aims Analyses in a Prototypical SMART: Workflow and Code for Three Types of Common Aims"
+    author:
+      - {family: Yap, given: Jamie}
+      - {family: Ferlic, given: Mason}
+      - {family: Durham, given: Gabriel}
+      - {family: Dziak, given: John J.}
+      - {family: Almirall, given: Daniel}
+    URL: https://d3learning.s3.us-east-2.amazonaws.com/SMART_Primary_Aims_R_Code.html
+  - id: wang2023
+    type: article-journal
+    title: "The Sequential Multiple Assignment Randomized Trial for Controlling Infectious Diseases: A Review of Recent Developments"
+    author:
+      - {family: Wang, given: Xinru}
+      - {family: Chakraborty, given: Bibhas}
+    issued: {date-parts: [[2023]]}
+    container-title: American Journal of Public Health
+    volume: 113
+    issue: 1
+    page: 49-59
+    DOI: 10.2105/AJPH.2022.307135
+  - id: casraiSMART2026
+    type: webpage
+    title: "SMART Designs: Sequential Multiple Assignment Randomized Trials"
+    author:
+      - literal: CASRAI Editorial Board
+    issued: {date-parts: [[2026, 8, 31]]}
+    URL: https://casrai.org/guides/smart-trial-designs
+  - id: casraiDictionary2026
+    type: book
+    title: CASRAI Dictionary
+    edition: v2026.1
+    author:
+      - literal: CASRAI Editorial Board
+    issued: {date-parts: [[2026]]}
+    publisher: CASRAI
+    URL: https://casrai.org/dictionary/
+  - id: holm1979
+    type: article-journal
+    title: A Simple Sequentially Rejective Multiple Test Procedure
+    author:
+      - {family: Holm, given: Sture}
+    issued: {date-parts: [[1979]]}
+    container-title: Scandinavian Journal of Statistics
+    volume: 6
+    issue: 2
+    page: 65-70
+    URL: https://www.jstor.org/stable/4615733
+link-citations: true
+---
+
+```{=html}
+<div id="smart-middle-header" aria-hidden="true">
+
+<style>
+#smart-middle-header {
+  --paper: light-dark(#fff, #202126);
+  --ink: light-dark(#344052, #e8e6f1);
+  --line: light-dark(#d9d1e7, #554c65);
+  --purple: #9776cf;
+  --blue: #71a5c9;
+  color: var(--ink);
+  margin: 0 auto;
+  max-width: 1000px;
+  font-family: system-ui, sans-serif;
+}
+
+#smart-middle-header svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+#smart-middle-header .trail {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+#smart-middle-header .active-trail {
+  fill: none;
+  stroke: var(--purple);
+  stroke-width: 2;
+  opacity: .7;
+}
+
+#smart-middle-header .word {
+  fill: #344052;
+  font-size: 76px;
+  font-weight: 500;
+  letter-spacing: 8px;
+}
+
+#smart-middle-header .letter {
+  fill: var(--purple);
+  font-size: 16px;
+  font-weight: 500;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+#smart-middle-header .label {
+  fill: var(--ink);
+  font-size: 14px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+#smart-middle-header #smh-response {
+  font-size: 19px;
+  font-weight: 500;
+}
+
+#smart-middle-header .slot {
+  fill: var(--paper);
+  stroke: var(--purple);
+  stroke-width: 1.5;
+}
+
+#smart-middle-header .check {
+  fill: var(--paper);
+  stroke: var(--blue);
+  stroke-width: 1.5;
+}
+
+#smart-middle-header .dot {
+  fill: var(--purple);
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+</style>
+
+<svg viewBox="0 0 1000 220" focusable="false">
+
+  <path class="trail"
+    d="M15 110 H92
+       M92 110 C160 110 160 70 230 70 H685
+       M92 110 C160 110 160 150 230 150 H685"/>
+
+  <path id="smh-first" class="active-trail"
+    d="M92 110 C160 110 160 70 230 70 H685"
+    opacity="0"/>
+
+  <path id="smh-later" class="active-trail"/>
+
+  <circle class="slot" cx="92" cy="110" r="18"/>
+  <text id="smh-initial" class="letter"
+    x="92" y="110">A/B</text>
+  <text class="label" x="92" y="147">Randomize</text>
+
+  <g id="smh-assess" opacity="0">
+    <path id="smh-diamond" class="check"/>
+    <text id="smh-response" class="label"
+      x="685" y="30"></text>
+  </g>
+
+  <g id="smh-second" opacity="0">
+    <circle id="smh-slot" class="slot"
+      cx="815" cy="110" r="17"/>
+    <text id="smh-next" class="letter"
+      x="815" y="110">C/D</text>
+    <text id="smh-again" class="label"
+      x="815" y="153">Randomize again</text>
+  </g>
+
+  <circle id="smh-dot" class="dot"
+    r="5" cx="92" cy="110"/>
+
+  <rect x="295" y="55"
+    width="355" height="110" rx="35"
+    fill="#DDD2EF"
+    stroke="#B5A0D8"
+    stroke-width="1.5"/>
+    
+  <text class="word" x="475" y="136"
+    text-anchor="middle">SMART</text>
+
+</svg>
+
+<script>
+(() => {
+  const root = document.getElementById("smart-middle-header");
+  const get = id => root.querySelector("#" + id);
+
+  const first = get("smh-first");
+  const later = get("smh-later");
+  const dot = get("smh-dot");
+  const initial = get("smh-initial");
+  const assess = get("smh-assess");
+  const diamond = get("smh-diamond");
+  const response = get("smh-response");
+  const second = get("smh-second");
+  const slot = get("smh-slot");
+  const next = get("smh-next");
+  const again = get("smh-again");
+
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    dot.style.display = "none";
+    return;
+  }
+
+  // Decorative illustration, not actual participant data.
+  let phase = "initial";
+  let elapsed = 0;
+  let last = 0;
+  let y = 70;
+  let treatment = "A";
+  let responding = true;
+  let option = "C";
+  let path = first;
+
+  function setDot(x, y) {
+    dot.setAttribute("cx", x);
+    dot.setAttribute("cy", y);
+  }
+
+  function reset() {
+    y = Math.random() < .5 ? 70 : 150;
+    treatment = y === 70 ? "A" : "B";
+    responding = Math.random() < .5;
+    option = Math.random() < .5 ? "C" : "D";
+
+    initial.textContent = "A/B";
+
+    first.setAttribute(
+      "d",
+      `M92 110 C160 110 160 ${y} 230 ${y} H685`
+    );
+
+    first.style.opacity = "0";
+    later.setAttribute("d", "");
+    assess.setAttribute("opacity", "0");
+    second.setAttribute("opacity", "0");
+
+    diamond.setAttribute(
+      "d",
+      `M685 ${y-12} L697 ${y} L685 ${y+12} L673 ${y} Z`
+    );
+
+    response.setAttribute("y", 25);
+
+    setDot(92, 110);
+    phase = "initial";
+    elapsed = 0;
+    path = first;
+  }
+
+  function travel(duration) {
+    const t = Math.min(elapsed / duration, 1);
+
+    const point = path.getPointAtLength(
+      path.getTotalLength() * t
+    );
+
+    setDot(point.x, point.y);
+    return t === 1;
+  }
+
+  function frame(now) {
+    if (!root.isConnected) return;
+
+    const dt = last ? Math.min(now - last, 60) : 16;
+    last = now;
+
+    if (!document.hidden) {
+      elapsed += dt * 1.4;
+
+      if (phase === "initial") {
+        initial.textContent = elapsed < 700
+          ? ["A", "B"][Math.floor(elapsed / 100) % 2]
+          : treatment;
+
+        if (elapsed > 1200) {
+          first.style.opacity = ".55";
+          phase = "first";
+          elapsed = 0;
+        }
+
+      } else if (phase === "first") {
+        if (travel(6500)) {
+          assess.setAttribute("opacity", "1");
+          response.textContent = "Check response";
+          phase = "check";
+          elapsed = 0;
+        }
+
+      } else if (phase === "check") {
+        if (elapsed > 1100) {
+          response.textContent = responding
+            ? "Responding · continue"
+            : "Insufficient · adapt";
+
+          if (responding) {
+            later.setAttribute("d", `M685 ${y} H985`);
+            path = later;
+            phase = "finish";
+            elapsed = 0;
+
+          } else {
+            later.setAttribute("d", `M685 ${y} H815`);
+            path = later;
+            phase = "to-second";
+            elapsed = 0;
+
+            slot.setAttribute("cy", y);
+            next.setAttribute("y", y);
+            next.textContent = "C/D";
+
+            again.setAttribute("y", 110);
+            second.setAttribute("opacity", "1");
+          }
+        }
+
+      } else if (phase === "to-second") {
+        if (travel(1600)) {
+          phase = "second";
+          elapsed = 0;
+        }
+
+      } else if (phase === "second") {
+        next.textContent = elapsed < 700
+          ? ["C", "D"][Math.floor(elapsed / 100) % 2]
+          : option;
+
+        if (elapsed > 1200) {
+          const endpoint = option === "C" ? y - 30 : y + 30;
+
+          later.setAttribute(
+            "d",
+            `M815 ${y} C885 ${y} 885 ${endpoint} 985 ${endpoint}`
+          );
+
+          path = later;
+          phase = "finish";
+          elapsed = 0;
+        }
+
+      } else if (phase === "finish") {
+        if (travel(2600)) {
+          phase = "rest";
+          elapsed = 0;
+        }
+
+      } else if (elapsed > 1800) {
+        reset();
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  reset();
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</div>
+```
+
+How can an experiment help researchers decide what to do when participants don't respond to their initially assigned treatment? In this explainer, I define and discuss SMART design, show how BestFIT used one for a weight loss study, and use simulated data to explore how researchers estimate strategy outcomes and address false positives.
+
+## Understanding SMART
+
+### From A/B Comparisons to Decisions Over Time
+
+A standard A/B experiment randomly assigns participants to one of two options and compares outcomes. It can also compare two adaptive programs, each with predetermined rules for altering treatment depending on a participant’s progress. Such an experiment compares the full treatment plans, but researchers must first decide which rules each treatment plan will use. A **Sequential Multiple Assignment Randomized Trial (SMART)** is useful when researchers still need evidence to develop those rules [@almirall2014].
+
+Imagine someone does not sufficiently respond to their initially assigned treatment in an experiment. Should they continue, receive additional support, or switch treatments? People can respond differently to the same treatment, and an individual's treatment needs can change over time. If researchers decide to choose the next treatment without data to justify their choice, it would be difficult to know whether another treatment option would have produced a better response. A SMART experiment helps researchers decide what the next steps are by using random assignment at important decision points over time to provide evidence for those choices.
+
+An adaptive strategy is a decision plan: what to offer first, when to check progress, and what to offer next depending on the response. Researchers also call this an adaptive intervention or dynamic treatment regime. The strategy is the plan; the SMART is the experiment used to learn about its decisions [@almirall2014].
+
+### Experimental Design
+
+Before the trial begins, researchers must specify the treatment options, assessment times, tailoring variables (information used to guide treatment decisions), and decision rules [@almirall2014].
+
+Below is a possible outline of an n-stage SMART experiment, where n is the number of sequential treatment stages. Participants may be randomized at multiple stages, depending on their eligibility.
+
+1.  **Randomize** an initial treatment or decision.
+2.  **Assess response** using a rule set in advance.
+3.  **Re-randomize eligible participants** to subsequent options; others may continue treatment. Repeat steps 2 and 3 at later decision points as specified by the design.
+4.  **Measure the final outcome.**
+
+Response itself is not randomized. Participants are either classified as responders or insufficient responders based on their progress. These groups may differ in baseline characteristics or in factors arising during treatment. Both measured and unmeasured differences may also affect the final outcome, so comparing the two groups' outcomes does not isolate a treatment effect. Someone classified as an insufficient responder under one treatment might have responded under another. Thus, response status is not necessarily a fixed characteristic. Re-randomization instead allows researchers to compare subsequent treatment options among participants eligible at that stage [@almirall2014].
+
+A participant follows one path. A complete strategy gives a rule for every relevant response state. Comparing strategies evaluates the resulting treatment sequences; it does not identify exactly how much each treatment caused one individual's outcome.
+
+### Concerns and How Researchers Can Address Them
+
+A SMART requires treatment options that can realistically be delivered, clear rules for assessing response, and trained staff. Researchers also need enough participants for their main comparison, including enough who reach later treatment stages. Missing outcomes and participants not following their assigned treatments require attention. To interpret the results causally, treatments must be clearly defined, randomization must be carried out correctly, and participants must have a chance of receiving the options being compared. This individual-level example also assumes that one participant’s treatment does not affect another participant’s outcome [@almirall2014; @nahum-shani2012; @wang2023].
+
+#### False Positives and Multiple Comparisons
+
+A false positive occurs when a test finds a statistically significant difference even though the true difference is zero. Four strategies allow six possible pairwise comparisons. Testing each at 5% does not generally keep the chance of at least one false positive across all six comparisons at 5%.
+
+One way to address this is Holm’s procedure. It orders the p-values from smallest to largest and compares them with adjusted thresholds. For six tests, the smallest is compared with $0.05/6$. If that null hypothesis is rejected, the next p-value is compared with $0.05/5$, and so on. The procedure stops rejecting when a p-value exceeds its threshold. With valid individual p-values, Holm controls the family-wise error rate, or the chance of at least one false positive, even when the tests are related [@holm1979].
+
+Randomizing treatment more than once is also different from repeatedly testing results for significance. Researchers who inspect results during a trial and stop when significance appears need an appropriate interim-monitoring plan. Ordinary Holm adjustment alone does not address unplanned repeated checking.
+
+#### Standard Errors and Shared Participants
+
+A standard error estimates how much an estimate would vary across repeated trials. When the same participant contributes to more than one strategy, those strategy estimates are related. Researchers must account for that relationship when calculating uncertainty in their difference. The sandwich covariance calculation used in my simulation keeps each participant’s contributions together rather than treating reused records as independent participants [@nahum-shani2012].
+
+#### Do Outcomes Need to Be Normally Distributed
+
+The outcomes don't necessarily need to be normally distributed since the large-sample Wald tests compare an estimated difference with its standard error. Their normal approximation concerns how estimates would vary across repeated trials, rather than requiring individual outcomes to be normally distributed. However, the approximation can perform poorly when too few participants follow relevant paths, weights are highly variable, or outcomes have extreme values.
+
+Thus, standard errors account for uncertainty while Holm accounts for multiple testing. Yet, neither fixes a biased estimate or guarantees reliable results when assumptions are not met.
+
+## A Real SMART: BestFIT
+
+### Methods
+
+BestFIT conducted a SMART experiment with 468 adults with obesity to investigate when to identify insufficient weight loss and what to offer next. Everyone began the same behavioral weight-loss treatment (SBT) consisting of coaching, goal setting, and tracking eating and physical activity. The first randomization assigned assessment timing, or when their weight loss progress would be looked at [@sherwood2021].
+
+| Step | What happened in BestFIT? |
+|:-----------------------------------|:-----------------------------------|
+| Randomize timing | Assess response early or late. |
+| Assess response | Decision rule: Classify insufficient response as **less than 2.5% weight loss** by session 3 or day 28 for early assessment, or **less than 5%** by session 7 or day 63 for late assessment. |
+| Re-randomize insufficient responders | Add **portion-controlled meals (PCM)** to SBT, or switch to **acceptance-based treatment (ABT)**. Responders continued SBT. |
+| Measure outcomes | Assess weight change at 6 and 18 months. |
+
+PCM provided prepared meals to reduce planning and portion decisions. ABT taught skills for handling cravings and uncomfortable experiences while acting consistently with health goals [@sherwood2021].
+
+The four embedded strategies were **Early PCM, Early ABT, Late PCM, and Late ABT**. Each prescribed continued SBT for responders. Thus, an early responder's observed path is compatible with both Early PCM and Early ABT strategies [@sherwood2021].
+
+The following is a visualization of the BestFIT two-stage SMART process. The animated paths are illustrative, not observed participant data.
+
+```{r}
+#| echo: false
+#| results: asis
+
+cat(r"---(
+<div id="bestfit-animation">
+  <button type="button" id="bf-toggle">Start</button>
+  <span id="bf-status" aria-live="polite">BestFIT SMART · simulated participant paths</span>
+
+  <svg id="bf-svg" width="100%" height="460"
+       role="img" aria-label="BestFIT SMART trial with early or late response assessment and subsequent randomized treatment for insufficient responders">
+    <g id="bf-scene"></g>
+  </svg>
+
+  <p class="bf-note">
+    SBT: behavioral weight-loss treatment, PCM: portion-controlled meals,
+    ABT: acceptance-based treatment
+  </p>
+</div>
+
+<style>
+#bestfit-animation {
+  --bf-text: #243047;
+  --bf-bg: #ffffff;
+  --bf-line: #d6d5e2;
+  --bf-active: #8b5cf6;
+  color: #243047;
+  font-family: system-ui, sans-serif;
+}
+#bf-toggle {
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 8px;
+  background: #6750a4;
+  color: white;
+  cursor: pointer;
+}
+#bf-status {
+  display: inline-block;
+  margin: 10px;
+  font-size: 13px;
+}
+#bf-svg {
+  display: block;
+  width: 100%;
+  height: 460px;
+  background: #f8f7fc;
+  border-radius: 16px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+#bestfit-animation .bf-note { font-size: 12px; margin: 12px 0; }
+#bestfit-animation .edge {
+  fill: none; stroke: var(--bf-line); stroke-width: 1.5;
+}
+#bestfit-animation .edge.chosen {
+  stroke: var(--bf-active); stroke-width: 3;
+}
+#bestfit-animation .node rect,
+#bestfit-animation .node circle,
+#bestfit-animation .node polygon {
+  fill: var(--bf-bg); stroke: var(--bf-line); stroke-width: 1.5;
+}
+#bestfit-animation .node.selected rect,
+#bestfit-animation .node.selected circle,
+#bestfit-animation .node.selected polygon {
+  fill: color-mix(in srgb, var(--bf-active) 12%, var(--bf-bg));
+  stroke: var(--bf-active);
+}
+#bestfit-animation text {
+  fill: var(--bf-text); font-size: 12px; font-weight: 400;
+}
+#bestfit-animation .traveler {
+  fill: var(--bf-active); stroke: var(--bf-bg); stroke-width: 3;
+}
+#smart-middle-header .label,
+#smart-middle-header #smh-response {
+  font-size: 18px;
+  font-weight: 500;
+}
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById("bestfit-animation");
+  const svg = root.querySelector("#bf-svg");
+  const scene = root.querySelector("#bf-scene");
+  const button = root.querySelector("#bf-toggle");
+  const status = root.querySelector("#bf-status");
+  const NS = "http://www.w3.org/2000/svg";
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function el(tag, attrs, parent = scene) {
+    const element = document.createElementNS(NS, tag);
+    Object.entries(attrs).forEach(([k,v]) => element.setAttribute(k,v));
+    parent.appendChild(element);
+    return element;
+  }
+
+  const nodes = [
+    ["entry",-240,0,"Begin SBT","box"],
+    ["start",0,0,"Randomize|assessment timing","circle"],
+    ["a",240,-210,"Early assessment|Session 3 or day 28*","box"],
+    ["b",240,210,"Late assessment|Session 7 or day 63*","box"],
+    ["ra",480,-210,"Lost ≥2.5%?","diamond"],
+    ["rb",480,210,"Lost ≥5%?","diamond"],
+    ["ca",720,-350,"Continue SBT","box"],
+    ["qa",720,-100,"Randomize|next treatment","circle"],
+    ["cb",720,70,"Continue SBT","box"],
+    ["qb",720,320,"Randomize|next treatment","circle"],
+    ["aa",960,-180,"SBT + PCM","box"],
+    ["ab",960,-20,"Switch to ABT","box"],
+    ["ba",960,240,"SBT + PCM","box"],
+    ["bb",960,400,"Switch to ABT","box"],
+    ["ea",1200,-350,"Weight change|6 & 18 months","box"],
+    ["eaa",1200,-180,"Weight change|6 & 18 months","box"],
+    ["eab",1200,-20,"Weight change|6 & 18 months","box"],
+    ["eb",1200,70,"Weight change|6 & 18 months","box"],
+    ["eba",1200,240,"Weight change|6 & 18 months","box"],
+    ["ebb",1200,400,"Weight change|6 & 18 months","box"]
+  ];
+
+  const lookup = Object.fromEntries(nodes.map(n => [n[0],n]));
+
+  const links = [
+    ["entry","start",""],
+    ["start","a","½"], ["start","b","½"],
+    ["a","ra",""], ["b","rb",""],
+    ["ra","ca","Yes"], ["ra","qa","No"],
+    ["rb","cb","Yes"], ["rb","qb","No"],
+    ["qa","aa","½"], ["qa","ab","½"],
+    ["qb","ba","½"], ["qb","bb","½"],
+    ["ca","ea",""], ["aa","eaa",""], ["ab","eab",""],
+    ["cb","eb",""], ["ba","eba",""], ["bb","ebb",""]
+  ];
+
+  const edges = {};
+  const groups = {};
+
+  for (const [a,b,label] of links) {
+    const A = lookup[a], B = lookup[b];
+    const middle = (A[1] + B[1]) / 2;
+    edges[a+"-"+b] = el("path", {
+      d: `M${A[1]},${A[2]} C${middle},${A[2]} ${middle},${B[2]} ${B[1]},${B[2]}`,
+      class: "edge"
+    });
+    if (label) {
+      el("text", {
+        x: middle, y: (A[2]+B[2])/2-12,
+        "text-anchor": "middle"
+      }).textContent = label;
+    }
+  }
+
+  for (const [id,x,y,label,shape] of nodes) {
+    const g = el("g", {
+      class: "node",
+      transform: `translate(${x},${y})`
+    });
+    groups[id] = g;
+
+    if (shape === "circle") el("circle", {r:58}, g);
+    else if (shape === "diamond")
+      el("polygon", {points:"0,-53 80,0 0,53 -80,0"}, g);
+    else
+      el("rect", {x:-94,y:-28,width:188,height:56,rx:12}, g);
+
+    const text = el("text", {"text-anchor":"middle"}, g);
+    const lines = label.split("|");
+    lines.forEach((line,i) => {
+      el("tspan", {
+        x:0, y:(i-(lines.length-1)/2)*17+4
+      }, text).textContent = line;
+    });
+  }
+
+  const dot = el("circle", {
+    r:9, class:"traveler", cx:-240, cy:0
+  });
+
+  let width=736, active=false, paused=false, last=0;
+  let route=[], segment=0, elapsed=0, participant=0;
+  let camera=whole();
+
+  function whole() {
+    return {x:-350,y:-440,w:1670,h:940};
+  }
+
+  function focus(x,y) {
+    const w=Math.min(570,width*1.05);
+    return {x:x-w/2,y:y-230,w:w,h:460};
+  }
+
+  function renderCamera() {
+    const scale=Math.min(width/camera.w,460/camera.h);
+    scene.setAttribute("transform",
+      `translate(${(width-camera.w*scale)/2-camera.x*scale},
+                 ${(460-camera.h*scale)/2-camera.y*scale})
+       scale(${scale})`);
+  }
+
+  function message(id) {
+    if (id==="entry") return "Everyone begins behavioral weight-loss treatment (SBT).";
+    if (id==="start") return "Randomize when to assess response: early or late.";
+    if (id==="a") return "Early: session 3 or day 28, whichever comes first.";
+    if (id==="b") return "Late: session 7 or day 63, whichever comes first.";
+    if (id==="ra") return "Early response criterion: at least 2.5% weight loss.";
+    if (id==="rb") return "Late response criterion: at least 5% weight loss.";
+    if (id==="ca" || id==="cb") return "Responder: continue SBT.";
+    if (id==="qa" || id==="qb") return "Insufficient response: randomize to PCM or ABT.";
+    if (id==="aa" || id==="ba") return "Add portion-controlled meals to SBT.";
+    if (id==="ab" || id==="bb") return "Switch to acceptance-based treatment.";
+    return "Assess weight change at 6 and 18 months.";
+  }
+
+  function nextParticipant() {
+    Object.values(edges).forEach(e=>e.classList.remove("chosen"));
+    Object.values(groups).forEach(g=>g.classList.remove("selected"));
+
+    const branch=Math.random()<0.5 ? "a":"b";
+
+    // Illustrative response status, not estimated from BestFIT data.
+    const responding=Math.random()<0.5;
+
+    route=["entry","start",branch,"r"+branch];
+    if (responding) route.push("c"+branch,"e"+branch);
+    else {
+      const option=Math.random()<0.5 ? "a":"b";
+      route.push("q"+branch,branch+option,"e"+branch+option);
+    }
+
+    participant++;
+    segment=0;
+    elapsed=0;
+    groups.entry.classList.add("selected");
+    dot.setAttribute("cx",-240);
+    dot.setAttribute("cy",0);
+    status.textContent="Illustrative participant "+participant+" · "+message("entry");
+  }
+
+  function frame(now) {
+    if (!active || !root.isConnected) return;
+    const dt=last ? Math.min(now-last,60):16;
+    last=now;
+
+    if (!paused) {
+      elapsed+=dt;
+
+      if (segment < route.length-1) {
+        const a=route[segment], b=route[segment+1];
+        const path=edges[a+"-"+b];
+        const p=Math.min(elapsed/2200,1);
+        const eased=p*p*(3-2*p);
+        const point=path.getPointAtLength(path.getTotalLength()*eased);
+
+        dot.setAttribute("cx",point.x);
+        dot.setAttribute("cy",point.y);
+
+        if (!reduced) {
+          const target=focus(point.x,point.y);
+          for (const k of Object.keys(camera))
+            camera[k]+=(target[k]-camera[k])*(1-Math.exp(-dt/180));
+        }
+
+        if (p===1) {
+          path.classList.add("chosen");
+          groups[b].classList.add("selected");
+          segment++;
+          elapsed=0;
+          status.textContent="Illustrative participant "+participant+" · "+message(b);
+        }
+      } else {
+        const target=whole();
+        for (const k of Object.keys(camera))
+          camera[k]+=(target[k]-camera[k])*(1-Math.exp(-dt/300));
+        if (elapsed>3200) nextParticipant();
+      }
+
+      renderCamera();
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  button.onclick=()=>{
+    if (!active) {
+      nextParticipant();
+      camera=reduced ? whole():focus(-240,0);
+      renderCamera();
+      active=true;
+      paused=false;
+      last=0;
+      requestAnimationFrame(frame);
+    } else {
+      paused=!paused;
+      last=0;
+    }
+    button.textContent=paused ? "Resume":"Pause";
+  };
+
+  new ResizeObserver(()=>{
+    width=root.clientWidth || 736;
+    svg.setAttribute("viewBox",`0 0 ${width} 460`);
+    renderCamera();
+  }).observe(root);
+})();
+</script>
+)---")
+```
+
+### Trial Findings
+
+At six months, insufficient responders assigned to PCM lost an estimated 2.7 pounds more than those assigned to ABT, but the 95% confidence interval included zero, so the results did not reveal a statistically significant difference (−5.8 to 0.5 lb). The overall weight comparison between the early and late assessments was also not statistically significant, and exploratory strategy comparisons did not identify a clearly superior strategy. Insufficient responders were not randomized to continue SBT alone, so the study could not determine whether either subsequent option outperformed continued SBT in that group [@sherwood2021].
+
+While the main treatment outcome comparisons from the study weren't statistically significant, BestFIT shows how researchers can investigate sequential treatment decisions without necessarily identifying a clear winner. The authors accounted for multiple testing in their two primary comparisons at six and 18 months by testing their smaller p-value against 0.025 and, if that comparison was significant, testing the larger against 0.05. In other words, they used a stricter significance rule to limit the chance of reporting a difference just by chance across these two comparisons [@sherwood2021].
+
+## My Simulation: Estimation, Testing, and Takeaway
+
+### Building a Simplified Trial with Known Answers
+
+To explore how SMART data can be analyzed, I simulate a simplified SMART trial inspired by the BestFIT study. Since I am simulating the data myself, I choose how the data are generated, meaning I can calculate the true average outcome under each strategy (it is very difficult to know the truth in the real world). I can then check how closely the estimates from simulated participants match those known values.
+
+I simulate 1,000 participants, all beginning with the same weight-loss treatment (SBT). Each has a 50% chance of assignment to early or late assessment. Responders continue SBT, and insufficient responders have a 50% chance of assignment to either PCM or ABT. Separately, I assume that 40% respond under early assessment and 60% respond under late assessment. These are response rates I chose, not randomization probabilities or findings from BestFIT.
+
+The outcome is six-month weight change, where negative numbers mean weight loss occurred. Responders have an assumed average change of −25 pounds, meaning they lost 25 pounds on average over six months. For insufficient responders, the assumed averages are −18 pounds for Early PCM, −14 pounds for Early ABT, −15 pounds for Late PCM, and −16 pounds for Late ABT. Individual outcomes vary around these averages using normal distributions with a standard deviation of 8 pounds. These numbers are chosen for the demonstration, not estimated from BestFIT.
+
+Different response rates show how complete strategies combine the two response groups. Making responders lose more weight on average helps show how overrepresenting them can distort an unweighted estimate.
+
+Because each strategy includes both response groups, its true simulated mean combines their averages. For example, Early PCM has a 40% chance of the responder outcome and a 60% chance of the insufficient-responder outcome, so the weighted average of the two, -20.8 pounds, is the true average for the complete Early PCM strategy in my simulated population. These response proportions calculate the simulated truth.
+
+```{r}
+#| label: simulate-smart
+#| echo: true
+#| code-fold: true
+
+set.seed(510)
+
+# 1. Create 1,000 simulated participants.
+n <- 1000
+
+smart <- data.frame(
+  ID = seq_len(n),
+  timing = sample(c("Early", "Late"), n, replace = TRUE)
+)
+
+# 2. Specify illustrative response probabilities.
+smart$response_probability <- ifelse(
+  smart$timing == "Early", 0.40, 0.60
+)
+
+# Generate response status: 1 = responder, 0 = insufficient responder.
+smart$response <- rbinom(
+  n, size = 1, prob = smart$response_probability
+)
+
+# 3. Only insufficient responders receive a second randomization.
+smart$second_treatment <- NA_character_
+
+nonresponders <- which(smart$response == 0)
+
+smart$second_treatment[nonresponders] <- sample(
+  c("PCM", "ABT"),
+  length(nonresponders),
+  replace = TRUE
+)
+
+# 4. Specify assumed mean outcomes for insufficient responders.
+# These numbers are invented for the demonstration.
+nonresponder_means <- c(
+  "Early PCM" = -18,
+  "Early ABT" = -14,
+  "Late PCM"  = -15,
+  "Late ABT"  = -16
+)
+
+# Responders continue SBT and have an assumed mean change of -25 lb.
+smart$mean_change <- -25
+
+path <- paste(
+  smart$timing[nonresponders],
+  smart$second_treatment[nonresponders]
+)
+
+smart$mean_change[nonresponders] <- unname(
+  nonresponder_means[path]
+)
+
+# 5. Generate observed six-month weight change.
+smart$weight_change <- rnorm(
+  n,
+  mean = smart$mean_change,
+  sd = 8
+)
+
+# 6. Calculate known population means under each complete strategy.
+truth <- data.frame(
+  strategy = names(nonresponder_means),
+  response_probability = c(0.40, 0.40, 0.60, 0.60),
+  nonresponder_mean = unname(nonresponder_means)
+)
+
+# Strategy mean =
+# P(response) * responder mean +
+# P(insufficient response) * subsequent-treatment mean.
+truth$true_mean <- with(
+  truth,
+  response_probability * (-25) +
+    (1 - response_probability) * nonresponder_mean
+)
+
+# Display the known simulated strategy means.
+knitr::kable(
+  truth[c("strategy", "true_mean")],
+  col.names = c(
+    "Adaptive strategy",
+    "True mean six-month weight change (lb)"
+  ),
+  digits = 1
+)
+```
+
+### Estimate Strategies from Observed Paths
+
+To estimate the average outcome under Early PCM, I include two groups assigned to early assessment: responders who continued SBT and insufficient responders who were randomized to receive PCM. A simple, unweighted average over-represents responders compared to the complete strategy. Since responders lose more weight on average in the simulation, weight loss is overstated when using an unweighted average.
+
+I compare that unweighted average with a weighted one. In this design, responders receive a weight of 2, calculated as $\frac{1}{\frac{1}{2}}$, because they go through randomization once. Re-randomized insufficient responders receive a weight of 4, calculated as $\frac{1}{\frac{1}{2}\frac{1}{2}}$, because they are randomized twice. These weights use treatment-assignment probabilities, not response probabilities.
+
+Responders contribute to both compatible strategies because both prescribe continued SBT for them, but they remain one participant. My code calculates each strategy’s weighted average by dividing the weighted sum of outcomes by the sum of weights. This follows the setup illustrated in the [Michigan SMART workflow](https://d3learning.s3.us-east-2.amazonaws.com/SMART_Primary_Aims_R_Code.html) [@nahum-shani2012; @yapSMARTworkflow].
+
+```{r}
+#| label: compare-smart-estimates
+#| echo: true
+#| code-fold: true
+
+# Estimate each strategy using participants with compatible paths.
+estimate_strategies <- function(dat) {
+
+  strategies <- data.frame(
+    timing = c("Early", "Early", "Late", "Late"),
+    next_treatment = c("PCM", "ABT", "PCM", "ABT")
+  )
+
+  results <- lapply(seq_len(nrow(strategies)), function(j) {
+
+    timing_j <- strategies$timing[j]
+    treatment_j <- strategies$next_treatment[j]
+
+    # Include responders with the matching assessment timing.
+    # Include insufficient responders only if their second treatment matches.
+    compatible <- dat$timing == timing_j & (
+      dat$response == 1 |
+        (!is.na(dat$second_treatment) &
+           dat$second_treatment == treatment_j)
+    )
+
+    group <- dat[compatible, ]
+
+    # Inverse probabilities of randomized assignments.
+    weights <- ifelse(group$response == 1, 2, 4)
+
+    data.frame(
+      strategy = paste(timing_j, treatment_j),
+      unweighted = mean(group$weight_change),
+      weighted = weighted.mean(group$weight_change, weights)
+    )
+  })
+
+  # Responders are deliberately reused across compatible strategies.
+  do.call(rbind, results)
+}
+
+# Analyze the trial generated in the previous chunk.
+comparison <- estimate_strategies(smart)
+
+comparison$true_mean <- truth$true_mean[
+  match(comparison$strategy, truth$strategy)
+]
+
+knitr::kable(
+  comparison,
+  digits = 2,
+  col.names = c(
+    "Strategy",
+    "Unweighted estimate",
+    "Weighted estimate",
+    "Simulated truth"
+  ),
+  caption = "One simulated trial: mean six-month weight change (lb)."
+)
+```
+
+In this one trial, weighted estimates are closer to the simulated truths for all four strategies. That doesn't need to occur in every trial as weighting doesn't remove sampling variation.
+
+### Repeating the Experiment
+
+Since only running one trial fails to show whether a method overestimates or underestimates an outcome, I repeat the trial 500 times, each with 1,000 participants and the same assumptions as before. Bias is the average estimate minus the simulated truth. For this simulation, negative bias means overstating weight loss.
+
+```{r}
+#| label: repeat-smart-simulation
+#| echo: true
+#| fig-width: 8
+#| fig-height: 5
+#| fig-cap: "Average estimates across 500 simulated trials. Negative values indicate weight loss. Each complete strategy includes responders and insufficient responders."
+#| code-fold: true
+
+# Generate a fresh trial using the SAME assumptions as before.
+simulate_trial <- function(n = 1000) {
+
+  dat <- data.frame(
+    ID = seq_len(n),
+    timing = sample(c("Early", "Late"), n, replace = TRUE)
+  )
+
+  response_probability <- ifelse(
+    dat$timing == "Early", 0.40, 0.60
+  )
+
+  dat$response <- rbinom(n, 1, response_probability)
+
+  dat$second_treatment <- NA_character_
+  nr <- which(dat$response == 0)
+
+  dat$second_treatment[nr] <- sample(
+    c("PCM", "ABT"), length(nr), replace = TRUE
+  )
+
+  assumed_means <- c(
+    "Early PCM" = -18,
+    "Early ABT" = -14,
+    "Late PCM" = -15,
+    "Late ABT" = -16
+  )
+
+  mean_change <- rep(-25, n)
+
+  path <- paste(dat$timing[nr], dat$second_treatment[nr])
+  mean_change[nr] <- unname(assumed_means[path])
+
+  dat$weight_change <- rnorm(n, mean_change, sd = 8)
+
+  dat
+}
+
+set.seed(511)
+
+# Each repetition generates and analyzes a new randomized trial.
+repetitions <- 500
+
+simulation_results <- do.call(
+  rbind,
+  lapply(seq_len(repetitions), function(b) {
+
+    estimates <- estimate_strategies(simulate_trial())
+    estimates$trial <- b
+    estimates
+  })
+)
+
+# Average the estimates across trials.
+simulation_summary <- aggregate(
+  cbind(unweighted, weighted) ~ strategy,
+  data = simulation_results,
+  FUN = mean
+)
+
+# Keep the original strategy order.
+simulation_summary <- simulation_summary[
+  match(truth$strategy, simulation_summary$strategy), ]
+rownames(simulation_summary) <- NULL
+
+simulation_summary$true_mean <- truth$true_mean
+simulation_summary$unweighted_bias <- with(
+  simulation_summary, unweighted - true_mean
+)
+simulation_summary$weighted_bias <- with(
+  simulation_summary, weighted - true_mean
+)
+
+# The plot below summarizes the repeated-trial estimates.
+
+# Compare average estimates with the known strategy means.
+local({
+
+  par(mar = c(5, 8, 2, 1))
+
+  y <- rev(seq_len(nrow(simulation_summary)))
+
+  limits <- range(
+    simulation_summary$unweighted,
+    simulation_summary$weighted,
+    simulation_summary$true_mean
+  ) + c(-0.8, 0.8)
+
+  plot(
+    simulation_summary$true_mean, y,
+    xlim = limits,
+    ylim = c(0.5, 5.2),
+    yaxt = "n",
+    pch = 4,
+    cex = 1.5,
+    lwd = 2,
+    xlab = "Mean six-month weight change (lb)",
+    ylab = "",
+    bty = "n"
+  )
+
+  axis(
+    2, at = y,
+    labels = simulation_summary$strategy,
+    las = 1,
+    tick = FALSE
+  )
+
+  abline(h = y, col = "grey90")
+
+  points(
+    simulation_summary$unweighted, y + 0.13,
+    pch = 17, col = "#D55E00", cex = 1.3
+  )
+
+  points(
+    simulation_summary$weighted, y - 0.13,
+    pch = 19, col = "#0072B2", cex = 1.3
+  )
+
+  # Redraw truth markers above the guide lines.
+  points(
+    simulation_summary$true_mean, y,
+    pch = 4, cex = 1.5, lwd = 2
+  )
+
+  legend(
+    "top",
+    legend = c("Simulated truth", "Unweighted", "Weighted"),
+    pch = c(4, 17, 19),
+    col = c("black", "#D55E00", "#0072B2"),
+    bty = "n",
+    horiz = TRUE,
+    cex = 0.85
+  )
+})
+```
+
+Across these 500 trials, the unweighted estimates overstate weight loss by about 1.19–1.87 pounds on average. The weighted estimates are much closer to the simulated truth, with estimated biases that round to approximately 0.00–0.03 pounds. Thus, it can be seen that repeating more trials helps describe the method’s average performance more accurately, rather than decreasing the method’s bias. Increasing the number of participants typically makes individual estimates more precise. Under the assumptions used here, the weighted estimates approach the true strategy means as the number of participants increases, consistent with the Law of Large Numbers.
+
+### Checking False Positives
+
+I now create a separate simulation where all four strategies have the same true average weight change: −20 pounds. Response probabilities and the responder mean remain the same. I adjust the insufficient-responder means so that each complete strategy averages −20 pounds. Since I set all four true strategy means equal to each other, any test reporting a statistically significant difference between them is a **false positive**.
+
+I simulate 5,000 trials of 1,000 participants for one scenario with normally distributed errors, and another scenario with skewed errors. Errors are the random variation in individual outcomes around the average assigned to their treatment path. Both error distributions have a mean of zero and a standard deviation of 8 pounds. This lets me examine the testing method under different outcome distributions.
+
+For each simulated trial, I use a participant-level sandwich covariance calculation to estimate uncertainty while accounting for participants shared across strategies. Next, I use two-sided Wald tests, which divide each estimated difference by its standard error to measure how far it is from zero relative to its uncertainty. The test calculates a p-value using a large-sample normal approximation. I use two-sided tests because I am checking for differences in either direction, rather than predicting in advance which strategy produces greater weight loss.
+
+I record:
+
+- How often one prespecified comparison, Early PCM versus Early ABT, produces a false positive.
+- How often at least one of the six comparisons produces a false positive without adjustment.
+- How often at least one produces a false positive after Holm adjustment.
+- How often the 95% confidence interval for the prespecified difference includes its true value, zero.
+
+```{r}
+#| label: null-error-simulation
+#| code-fold: true
+
+# No additional packages are required beyond knitr for displaying tables.
+strategy_names <- c("Early PCM", "Early ABT", "Late PCM", "Late ABT")
+
+# Joint normalized IPW estimates and participant-level sandwich covariance.
+# This is a direct calculation for an unadjusted, saturated mean model,
+# not a reproduction of the Michigan covariate-adjusted GEE code.
+fit_strategy_means <- function(dat) {
+  n_obs <- nrow(dat)
+
+  W <- sapply(strategy_names, function(label) {
+    parts <- strsplit(label, " ", fixed = TRUE)[[1]]
+
+    compatible <- dat$timing == parts[1] & (
+      dat$response == 1 |
+        (!is.na(dat$second_treatment) &
+           dat$second_treatment == parts[2])
+    )
+
+    ifelse(compatible, ifelse(dat$response == 1, 2, 4), 0)
+  })
+
+  stopifnot(all(colSums(W) > 0))
+
+  mu <- colSums(W * dat$weight_change) / colSums(W)
+
+  residuals <- outer(dat$weight_change, rep(1, 4)) -
+    matrix(mu, nrow = n_obs, ncol = 4, byrow = TRUE)
+
+  influence <- sweep(W * residuals, 2, colMeans(W), "/")
+
+  # Empirical covariance of participant influence values / sample size.
+  V <- crossprod(influence) / (n_obs * (n_obs - 1))
+
+  dimnames(V) <- list(strategy_names, strategy_names)
+
+  list(mean = mu, covariance = V)
+}
+
+# All six contrasts; the first is the prespecified Early PCM - Early ABT.
+pairs <- combn(4, 2)
+
+contrast_names <- apply(pairs, 2, function(x) {
+  paste(strategy_names[x[1]], "minus", strategy_names[x[2]])
+})
+
+C <- matrix(0, nrow = ncol(pairs), ncol = 4)
+
+for (k in seq_len(nrow(C))) {
+  C[k, pairs[1, k]] <- 1
+  C[k, pairs[2, k]] <- -1
+}
+
+# Inference for the original, non-null simulation shown above.
+fit <- fit_strategy_means(smart)
+mean_se <- sqrt(diag(fit$covariance))
+
+mean_intervals <- data.frame(
+  strategy = strategy_names,
+  estimate = unname(fit$mean),
+  lower_95 = unname(fit$mean - qnorm(.975) * mean_se),
+  upper_95 = unname(fit$mean + qnorm(.975) * mean_se)
+)
+
+# Original-trial pointwise intervals are available in mean_intervals.
+
+simulate_null <- function(n = 1000, noise = "Normal") {
+
+  dat <- data.frame(
+    ID = seq_len(n),
+    timing = sample(c("Early", "Late"), n, replace = TRUE)
+  )
+
+  p <- ifelse(dat$timing == "Early", .4, .6)
+  dat$response <- rbinom(n, 1, p)
+
+  dat$second_treatment <- NA_character_
+  nr <- which(dat$response == 0)
+
+  dat$second_treatment[nr] <- sample(
+    c("PCM", "ABT"), length(nr), replace = TRUE
+  )
+
+  conditional_mean <- ifelse(
+    dat$response == 1,
+    -25,
+    (-20 - p * (-25)) / (1 - p)
+  )
+
+  # Both errors have mean 0 and SD 8. The second is distinctly skewed.
+  error <- if (noise == "Normal") {
+    rnorm(n, 0, 8)
+  } else {
+    8 * (rexp(n, rate = 1) - 1)
+  }
+
+  dat$weight_change <- conditional_mean + error
+
+  dat
+}
+
+set.seed(512)
+
+B <- 5000
+noise_types <- c("Normal", "Skewed")
+
+error_results <- do.call(
+  rbind,
+  lapply(noise_types, function(noise) {
+
+    draws <- replicate(B, {
+
+      f <- fit_strategy_means(simulate_null(noise = noise))
+
+      delta <- as.vector(C %*% f$mean)
+      se <- sqrt(diag(C %*% f$covariance %*% t(C)))
+
+      p_values <- 2 * pnorm(-abs(delta / se))
+
+      c(
+        single = p_values[1] < .05,
+        family_unadjusted = any(p_values < .05),
+        family_holm = any(p.adjust(p_values, "holm") < .05),
+        single_coverage = abs(delta[1]) <= qnorm(.975) * se[1]
+      )
+    })
+
+    rates <- rowMeans(draws)
+
+    data.frame(
+      error_distribution = noise,
+      measure = c(
+        "Single prespecified test: Type I error",
+        "Six tests, unadjusted: family-wise error",
+        "Six tests, Holm: family-wise error",
+        "Prespecified contrast: 95% interval coverage"
+      ),
+      rate = unname(rates),
+      MC_SE = sqrt(rates * (1 - rates) / B)
+    )
+  })
+)
+
+knitr::kable(
+  error_results,
+  digits = 4,
+  row.names = FALSE,
+  col.names = c(
+    "Error distribution",
+    "Statistical measure",
+    "Observed rate",
+    "Monte Carlo SE"
+  ),
+  caption = "Null calibration across 5,000 trials per error distribution. MC SE measures simulation uncertainty."
+)
+```
+
+Rates are proportions of simulated trials. Monte Carlo standard errors describe simulation uncertainty, not the uncertainty of a strategy estimate within one trial.
+
+```{r}
+#| label: interpret-null-results
+#| results: asis
+#| echo: false
+
+for (noise in noise_types) {
+  tab <- error_results[error_results$error_distribution == noise, ]
+
+  cat(sprintf(
+    "With %s errors, the prespecified test rejected in %.1f%% of null trials; the unadjusted six-test family rejected at least once in %.1f%%, compared with %.1f%% after Holm adjustment. The prespecified contrast's 95%% interval covered zero in %.1f%% of trials.\n\n",
+    tolower(noise),
+    100 * tab$rate[1],
+    100 * tab$rate[2],
+    100 * tab$rate[3],
+    100 * tab$rate[4]
+  ))
+}
+```
+
+The prespecified test produced false positives in roughly 5% of trials, while about 20% of trials had at least one false positive across the six unadjusted comparisons. Holm adjustment brought that overall rate below 5% in these runs. These results illustrate the effect of multiple-testing adjustment when the standard errors already account for shared participants. They don't separately test what happens if that dependence is ignored. The prespecified test and Holm-adjusted comparisons performed reasonably close to their intended error-control levels under both normal and skewed errors, but these two scenarios don’t establish that the methods work equally well for every SMART.
+
+### What You Should Take Away
+
+A SMART helps researchers develop evidence-based rules for what to offer over time. BestFIT shows the design in practice; this simulation illustrates why strategy estimation and hypothesis testing need analysis that matches the design.
+
+The simulation does not show whether any real treatment works or how likely the tests are to detect a true difference. It also doesn't consider situations with missing outcomes, noncompliance, very small treatment groups, or every possible outcome distribution.
+
+## References {.unnumbered .unlisted}
+
+::: {#refs}
+:::
