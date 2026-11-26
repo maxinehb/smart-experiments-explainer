@@ -66,4 +66,4 @@ M.S. in Data Science Candidate, Emory University
 
 B.S. in Applied Mathematics and Statistics, Emory University
 
-[LinkedIn](https://www.linkedin.com/in/maxine-hakimi-bulson/) | [GitHub](https://github.com/maxinehb)
+[LinkedIn](https://www.linkedin.com/in/maxine-hakimi-bulson/) | [GitHub](https://github.com/maxinehb) | [Professional Portfolio](https://maxinehb-portfolio.share.connect.posit.cloud/)
